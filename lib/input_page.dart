@@ -8,21 +8,61 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Container greyBox() {
-    return Container(
-      margin: const EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        color: const Color(0xFF1D1E33),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: greyBox(),
+        child: Column(
+          children: [
+            Expanded(
+                child: Row(
+              children: const [
+                Expanded(
+                    child: GreyCard(
+                  color: Color(0xFF1D1E33),
+                )),
+                Expanded(
+                    child: GreyCard(
+                  color: Color(0xFF1D1E33),
+                )),
+              ],
+            )),
+            const Expanded(
+                child: GreyCard(
+              color: Color(0xFF1D1E33),
+            )),
+            Expanded(
+                child: Row(
+              children: const [
+                Expanded(
+                    child: GreyCard(
+                  color: Color(0xFF1D1E33),
+                )),
+                Expanded(
+                    child: GreyCard(
+                  color: Color(0xFF1D1E33),
+                )),
+              ],
+            )),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class GreyCard extends StatelessWidget {
+  final Color color;
+
+  const GreyCard({Key? key, required this.color}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        color: color,
       ),
     );
   }
