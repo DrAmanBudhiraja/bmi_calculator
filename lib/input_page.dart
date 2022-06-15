@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'grey_card.dart';
 import 'icon_content.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'constants.dart';
 
-const bottomPinkButtonHeight = 70.0;
-const activeCardColor = Color(0xFF1D1E33);
-const inactiveCardColor = Color(0xFF111328);
-const bottomPinkButton = Color(0xFFEB1555);
+enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -16,75 +14,90 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColor = inactiveCardColor;
-  Color femaleCardColor = inactiveCardColor;
-
-  void updateColor(GenderType selectedGender) {
-    //male = 1
-    if (selectedGender == GenderType.male) {
-      if (maleCardColor == inactiveCardColor) {
-        maleCardColor = activeCardColor;
-        femaleCardColor = inactiveCardColor;
-      } else {
-        maleCardColor = inactiveCardColor;
-      }
-    }
-    //female = 2
-    if (selectedGender == GenderType.female) {
-      if (femaleCardColor == inactiveCardColor) {
-        femaleCardColor = activeCardColor;
-        maleCardColor = inactiveCardColor;
-      } else {
-        femaleCardColor = inactiveCardColor;
-      }
-    }
-  }
+  Gender? selectedGender;
+  int height = 180;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
+                    child: GreyCard(
+                      onPress: () {
                         setState(() {
-                          updateColor(GenderType.male);
+                          selectedGender = Gender.male;
                         });
                       },
-                      child: GreyCard(
-                        cardChild: const IconContent(
-                          icon: FontAwesomeIcons.mars,
-                          label: 'MALE',
-                        ),
-                        color: maleCardColor,
+                      cardChild: const IconContent(
+                        icon: FontAwesomeIcons.mars,
+                        label: 'MALE',
                       ),
+                      color: selectedGender == Gender.male
+                          ? kActiveCardColor
+                          : kInactiveCardColor,
                     ),
                   ),
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
+                    child: GreyCard(
+                      onPress: () {
                         setState(() {
-                          updateColor(GenderType.female);
+                          selectedGender = Gender.female;
                         });
                       },
-                      child: GreyCard(
-                        cardChild: const IconContent(
-                            icon: FontAwesomeIcons.venus, label: 'FEMALE'),
-                        color: femaleCardColor,
-                      ),
+                      cardChild: const IconContent(
+                          icon: FontAwesomeIcons.venus, label: 'FEMALE'),
+                      color: selectedGender == Gender.female
+                          ? kActiveCardColor
+                          : kInactiveCardColor,
                     ),
                   ),
                 ],
               ),
             ),
-            const Expanded(
+            Expanded(
               child: GreyCard(
-                color: activeCardColor,
+                color: kActiveCardColor,
+                cardChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'HEIGHT',
+                      style: kCardTextStyle,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          height.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        const Text(
+                          'cm',
+                          style: kCardTextStyle,
+                        )
+                      ],
+                    ),
+                    Slider(
+                        value: height.toDouble(),
+                        min: kMinSliderValue,
+                        max: kMaxSliderValue,
+                        activeColor: kSliderActiveColor,
+                        inactiveColor: kSliderInactiveColor,
+                        onChanged: (double newValue) {
+                          setState(() {
+                            height = newValue.round();
+                          });
+                        }),
+                  ],
+                ),
               ),
             ),
             Expanded(
@@ -92,20 +105,20 @@ class _InputPageState extends State<InputPage> {
                 children: const [
                   Expanded(
                       child: GreyCard(
-                    color: activeCardColor,
+                    color: kActiveCardColor,
                   )),
                   Expanded(
                     child: GreyCard(
-                      color: activeCardColor,
+                      color: kActiveCardColor,
                     ),
                   ),
                 ],
               ),
             ),
             Container(
-              height: bottomPinkButtonHeight,
+              height: kBottomPinkButtonHeight,
               width: double.infinity,
-              color: bottomPinkButton,
+              color: kBottomPinkButton,
               child: const Center(
                   child: Text(
                 'CALCULATE',
@@ -122,5 +135,3 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
-
-enum GenderType { male, female }
