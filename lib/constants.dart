@@ -13,6 +13,7 @@ const kSliderActiveColor = Color(0xFFEB1555);
 const kMinSliderValue = 120.0;
 const kMaxSliderValue = 220.0;
 const kSliderInactiveColor = Color(0xFF8D8E98);
+const kFABColor = Color(0xFF4C4F5E);
 
 const kCardTextStyle = TextStyle(
   color: kFontColor,
