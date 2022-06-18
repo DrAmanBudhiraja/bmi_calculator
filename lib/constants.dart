@@ -22,3 +22,16 @@ const kCardTextStyle = TextStyle(
 );
 
 const kNumberTextStyle = TextStyle(fontSize: 50, fontWeight: FontWeight.w900);
+
+const kResultTextStyle = TextStyle(
+  color: Color(0xFF24D876),
+  fontSize: 22.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kBMITextStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 100.0,
+);
+
+const kResultCommentStyle = TextStyle(fontSize: 22.0);

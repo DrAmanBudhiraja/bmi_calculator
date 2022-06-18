@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/result_page.dart';
 import 'package:flutter/material.dart';
 import 'grey_card.dart';
 import 'icon_content.dart';
@@ -186,19 +187,26 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            Container(
-              height: kBottomPinkButtonHeight,
-              width: double.infinity,
-              color: kBottomPinkButton,
-              child: const Center(
-                  child: Text(
-                'CALCULATE',
-                style: TextStyle(
-                  fontSize: 20,
-                  letterSpacing: 1.5,
-                  fontWeight: FontWeight.bold,
-                ),
-              )),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const ResultPage();
+                }));
+              },
+              child: Container(
+                height: kBottomPinkButtonHeight,
+                width: double.infinity,
+                color: kBottomPinkButton,
+                child: const Center(
+                    child: Text(
+                  'CALCULATE',
+                  style: TextStyle(
+                    fontSize: 20,
+                    letterSpacing: 1.5,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )),
+              ),
             ),
           ],
         ),
