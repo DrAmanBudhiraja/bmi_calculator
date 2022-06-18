@@ -1,9 +1,11 @@
-import 'package:bmi_calculator/result_page.dart';
+import 'package:bmi_calculator/screens/result_page.dart';
 import 'package:flutter/material.dart';
-import 'grey_card.dart';
-import 'icon_content.dart';
+import 'package:bmi_calculator/components/grey_card.dart';
+import 'package:bmi_calculator/components/icon_content.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'constants.dart';
+import 'package:bmi_calculator/constants.dart';
+import 'package:bmi_calculator/components/bottom_button.dart';
+import 'package:bmi_calculator/components/round_icon_button.dart';
 
 enum Gender { male, female }
 
@@ -187,52 +189,21 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const ResultPage();
-                }));
-              },
-              child: Container(
-                height: kBottomPinkButtonHeight,
-                width: double.infinity,
-                color: kBottomPinkButton,
-                child: const Center(
-                    child: Text(
-                  'CALCULATE',
-                  style: TextStyle(
-                    fontSize: 20,
-                    letterSpacing: 1.5,
-                    fontWeight: FontWeight.bold,
+            BottomButton(
+              text: 'CALCULATE',
+              onPress: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const ResultPage();
+                    },
                   ),
-                )),
-              ),
+                );
+              },
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class RoundIconButton extends StatelessWidget {
-  const RoundIconButton({Key? key, required this.icon, required this.onPress})
-      : super(key: key);
-
-  final IconData icon;
-  final VoidCallback onPress;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      onPressed: onPress,
-      fillColor: kFABColor,
-      constraints: const BoxConstraints.tightFor(width: 56.0, height: 56.0),
-      elevation: 6.0,
-      shape: const CircleBorder(),
-      child: FaIcon(
-        icon,
-        color: kFontColor,
       ),
     );
   }

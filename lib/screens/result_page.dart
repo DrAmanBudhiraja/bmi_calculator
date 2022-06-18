@@ -1,6 +1,7 @@
 import 'package:bmi_calculator/constants.dart';
-import 'package:bmi_calculator/grey_card.dart';
+import 'package:bmi_calculator/components/grey_card.dart';
 import 'package:flutter/material.dart';
+import '../components/bottom_button.dart';
 
 class ResultPage extends StatelessWidget {
   const ResultPage({Key? key}) : super(key: key);
@@ -46,24 +47,11 @@ class ResultPage extends StatelessWidget {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: () {
+            BottomButton(
+              onPress: () {
                 Navigator.pop(context);
               },
-              child: Container(
-                height: kBottomPinkButtonHeight,
-                width: double.infinity,
-                color: kBottomPinkButton,
-                child: const Center(
-                    child: Text(
-                  'RE-CALCULATE',
-                  style: TextStyle(
-                    fontSize: 20,
-                    letterSpacing: 1.5,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )),
-              ),
+              text: 'RE-CALCULATE',
             ),
           ],
         ),
