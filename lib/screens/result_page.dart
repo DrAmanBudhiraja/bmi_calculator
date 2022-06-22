@@ -4,7 +4,16 @@ import 'package:flutter/material.dart';
 import '../components/bottom_button.dart';
 
 class ResultPage extends StatelessWidget {
-  const ResultPage({Key? key}) : super(key: key);
+  const ResultPage(
+      {Key? key,
+      required this.bmi,
+      required this.resultText,
+      required this.resultInterpretation})
+      : super(key: key);
+
+  final String bmi;
+  final String resultText;
+  final String resultInterpretation;
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +38,17 @@ class ResultPage extends StatelessWidget {
                 cardChild: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
+                  children: [
                     Text(
-                      'Normal',
+                      resultText,
                       style: kResultTextStyle,
                     ),
                     Text(
-                      '20',
+                      bmi,
                       style: kBMITextStyle,
                     ),
                     Text(
-                      'This is Normal BMI',
+                      resultInterpretation,
                       textAlign: TextAlign.center,
                       style: kResultCommentStyle,
                     )
